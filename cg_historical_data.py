@@ -7,14 +7,15 @@ import math
 
 ### Variables to edit
 
-# format: year, month, day, hour, minute, second
-start_date_time = datetime(2020, 12, 1, 0, 0, 0)
+# Format: year, month, day, hour, minute, second
+start_date_time = datetime(2022, 12, 1, 0, 0, 0)
 end_date_time = datetime(2023, 2, 1, 0, 0, 0)      
 
-timeframe_hour = 24
+timeframe_hour = 1
 
-# add coin ids into this list
-coins_list = ['bitcoin', 'solana']
+# Add coin ids into this list
+# To get the id, go to the coin chart page in CoinGecko, and the last part of the URL path is the ID
+coins_list = ['bitcoin', 'star-atlas-dao']
 
 ### Utils
 
@@ -66,7 +67,7 @@ above 90 days from current time = daily data (00:00 UTC)
 percentage_change_dict = {}
 
 for coin in coins_list:
-    print('\nRetrieving {} data ...'.format(coin.capitalize()))
+    print('\nRetrieving {} data ...'.format(' '.join(coin.split('-')).title()))
 
     data_volume_prices = np.empty((0,2))
 
@@ -96,7 +97,7 @@ for coin in coins_list:
 time_array = time_array[::timeframe_hour]
 
 for coin, percentage_change in percentage_change_dict.items():
-    plt.plot(time_array, percentage_change, label=coin.capitalize())
+    plt.plot(time_array, percentage_change, label=' '.join(coin.split('-')).title())
 
 plt.xlabel('Date and Time')
 plt.ylabel('Price % Change')
